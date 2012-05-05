@@ -1,0 +1,30 @@
+@CHARSET "ISO-8859-1";
+#login_dialog {
+	position:absolute; 
+	top: 50%;
+	left: 50%; 
+	width:324px; 
+	height:200px;
+	margin-top: -100px;
+	margin-left: -162px;
+    z-index:2; 
+    background-color:#ddf; 
+}
+#inner_login_dialog {
+	position:absolute; 
+	top: 50%;
+	left: 50%; 
+	width:250px; 
+	height:110px;
+	margin-top: -55px;
+	margin-left: -125px;
+    z-index:1; 
+}
+
+#login_bt {
+	width: 100px;
+}
+
+#inner_login_dialog table td {
+	padding: 8px;
+}
