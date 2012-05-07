@@ -1,24 +1,23 @@
 <?php include('auth.php'); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  <head>
-  <title>Geschützter Bereich</title>
+  <title>Simple DBMail Admin</title>
  </head>
  <body>
  <?php include('menu.php'); ?>
-  <h1>Herzlich willkommen beim Simple <b>DBMail Admin</b></h1>
-  <p>Sie sind nun angemeldet.</p>
+  <h1>Welcome to <b>Simple DBMail Admin</b></h1>
 
   <?php include('db_connection.php'); ?> 
 	
-	<h2>User</h2>
+	<h2>Users</h2>
 	<table border='1'>
-	<tr> <th>user ID</th> <th>name</th> <th>Mailbox storage</th> <th>Sieve storage</th> <th>last_login</th> </tr>
+	<tr> <th>User ID</th> <th>User Name</th> <th>Mailbox storage</th> <th>last login</th> </tr>
 	
 	<?php	
 	// SQL-Query
 	$sql = "SELECT * FROM dbmail_users";
-	// ausführen der Query
+	// execute Query
 	$db_erg = mysql_query( $sql );
 	if ( ! $db_erg ){
 		die('Ungültige Abfrage: ' . mysql_error());
@@ -28,18 +27,17 @@
     // Aushabe der Daten
 	$mbox_cur_mb = round($daten['curmail_size'] / 1048576, 2);
 	$mbox_max_mb = round($daten['maxmail_size'] / 1048576, 2);
-	$sieve_cur_mb = round($daten['cursieve_size'] / 1048576, 2);
-	$sieve_max_mb = round($daten['maxsieve_size'] / 1048576, 2);
-    echo "<tr> <td><a href='edit_user.php?user_idnr=".$daten['user_idnr']."'>".$daten['userid']."</a></td> <td>".$daten['name']."</td> <td>".$mbox_cur_mb." MB / ".$mbox_max_mb." MB</td> <td>".$sieve_cur_mb." MB / ".$sieve_max_mb." MB</td>  <td>".$daten['last_login']."</td></tr>";
+	echo "<tr> <td><a href='edit_user.php?user_idnr=".$daten['user_idnr']."'>".$daten['userid']."</a></td> <td>".$daten['name']."</td> <td>".$mbox_cur_mb." MB / ".$mbox_max_mb." MB</td> <td>".$daten['last_login']."</td></tr>";
 	}
 	echo "</table>";
-		// Anzeige der Anzahl der Einträge
-	$anzahl_eintraege = mysql_num_rows($db_erg);
-	echo "<p>Number of users: $anzahl_eintraege </p>";
+	
+	// Show numer of entrys.
+	$numberOfEntrys = mysql_num_rows($db_erg);
+	echo "<p>Number of users: $numberOfEntrys </p>";
 	?>
 	
 	
-	<!-- DBMail aliases gruppiert nach deliver_to -->
+	<!-- DBMail aliases group by deliver_to -->
 	
 	<h2>Forwards</h2>
 	
