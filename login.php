@@ -1,4 +1,6 @@
 <?php
+     require_once ('config.php');
+
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       session_start();
 
@@ -10,7 +12,7 @@
 
       // check login and password
       // TODO store in an external File
-      if ($username == 'panolli' && $password == 'gummiente') {
+      if ($username == SDBMA_LOGIN && $password == SDBMA_PASSWORD) {
        $_SESSION['logedIn'] = true;
 
        // forward to startpage

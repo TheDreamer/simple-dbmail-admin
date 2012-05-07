@@ -1,10 +1,9 @@
 <?php
-	$db_link = @mysql_connect (localhost,
-                           root,
-                           JuthKuz1);
+	require_once ('config.php');
+	$db_link = @mysql_connect (MYSQL_HOST, MYSQL_LOGIN, MYSQL_PASSWORD);
 	if ( ! $db_link ){
-		die('keine Verbindung zur Zeit möglich - später probieren ');
+		die('No Connection! Try it later!');
 	}
-	$db_sel = mysql_select_db( 'dbmail' )
-    or die("Auswahl der Datenbank fehlgeschlagen");
+	$db_sel = mysql_select_db( MYSQL_DATASE )
+    or die("Could not select database!");
 ?>
