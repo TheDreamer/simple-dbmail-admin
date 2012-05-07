@@ -13,7 +13,6 @@
 	<h2>Users</h2>
 	<table border='1'>
 	<tr> <th>User ID</th> <th>User Name</th> <th>Mailbox storage</th> <th>last login</th> </tr>
-	
 	<?php	
 	// SQL-Query
 	$sql = "SELECT * FROM dbmail_users";
@@ -36,6 +35,7 @@
 	echo "<p>Number of users: $numberOfEntrys </p>";
 	?>
 	
+	<p><a href='new_user.php'>Add User</a></p>
 	
 	<!-- DBMail aliases group by deliver_to -->
 	
