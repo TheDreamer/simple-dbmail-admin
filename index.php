@@ -3,15 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  <head>
   <title>Simple DBMail Admin</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
  </head>
  <body>
  <?php include('menu.php'); ?>
   <h1>Welcome to <b>Simple DBMail Admin</b></h1>
+  
+<hr align="left">
+
 
   <?php include('db_connection.php'); ?> 
 	
 	<h2>Users</h2>
-	<table border='1'>
+	<table id='users' border='1'>
 	<tr> <th>User ID</th> <th>User Name</th> <th>Mailbox storage</th> <th>last login</th> </tr>
 	<?php	
 	// SQL-Query
@@ -21,12 +25,22 @@
 	if ( ! $db_erg ){
 		die('Ungültige Abfrage: ' . mysql_error());
 	}
+	$alt = false; // alter the class of tr
 	while ($daten = mysql_fetch_array( $db_erg, MYSQL_ASSOC))
 	{
     // Aushabe der Daten
 	$mbox_cur_mb = round($daten['curmail_size'] / 1048576, 2);
 	$mbox_max_mb = round($daten['maxmail_size'] / 1048576, 2);
-	echo "<tr> <td><a href='edit_user.php?user_idnr=".$daten['user_idnr']."'>".$daten['userid']."</a></td> <td>".$daten['name']."</td> <td>".$mbox_cur_mb." MB / ".$mbox_max_mb." MB</td> <td>".$daten['last_login']."</td></tr>";
+	//alternating the class of tr
+	if ($alt){
+		echo "<tr>";
+		$alt = false;
+	} else {
+		echo "<tr class='alt'>";
+		$alt = true;
+	}
+	
+	echo "<td><a href='edit_user.php?user_idnr=".$daten['user_idnr']."'>".$daten['userid']."</a></td> <td>".$daten['name']."</td> <td>".$mbox_cur_mb." MB / ".$mbox_max_mb." MB</td> <td>".$daten['last_login']."</td></tr>";
 	}
 	echo "</table>";
 	
@@ -35,9 +49,13 @@
 	echo "<p>Number of users: $numberOfEntrys </p>";
 	?>
 	
-	<p><a href='new_user.php'>Add User</a></p>
+	<div id='button'><a href='new_user.php'>Add User</a></div>
 	
 	<!-- DBMail aliases group by deliver_to -->
+
+	
+<hr  align="left">
+	
 	
 	<h2>Forwards</h2>
 	
@@ -131,29 +149,5 @@
 	Email address <input type='text' name='alias' size='30'> deliver to -> <input type='text' name='deliver_to' size='30'> <input type='button' value='Add' onClick='saveAlias()'>
 	</form>
 	
-	<?php
-	// DBMail aliases
-	echo "<h2>dbmail_aliases</h2>";
-	// SQL-Befehl für den Zugriff
-	$sql = "SELECT * FROM dbmail_aliases";
-	// ausführen des mysql-Befehls
-	$db_erg = mysql_query( $sql );
-	if ( ! $db_erg ){
-		die('Ungültige Abfrage: ' . mysql_error());
-	}
-	echo "<table border='1'>";
-	echo "<tr> <th>alias_idnr</th> <th>alias</th> <th>deliver_to</th> <th>client_idnr</th> </tr>";
-	
-	while ($daten = mysql_fetch_array( $db_erg, MYSQL_ASSOC))
-	{
-    // Aushabe der Daten
-    echo "<tr> <td>".$daten['alias_idnr']."</td> <td>".$daten['alias']."</td> <td>".$daten['deliver_to']."</td> <td>".$daten['client_idnr']."</td></tr>";
-	}
-	echo "</table>";
-	// Anzeige der Anzahl der Einträge
-	$anzahl_eintraege = mysql_num_rows($db_erg);
-	echo "<p>Anzahl der Einträge: $anzahl_eintraege</p>";
-	?>	
-
 </body>
 </html>
