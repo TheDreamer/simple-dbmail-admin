@@ -6,7 +6,11 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
  </head>
  <body>
+ 
  <?php include('menu.php'); ?>
+ 
+ <div id="content_container">
+ 
   <h1>Welcome to <b>Simple DBMail Admin</b></h1>
   
 <hr align="left">
@@ -33,10 +37,10 @@
 	$mbox_max_mb = round($daten['maxmail_size'] / 1048576, 2);
 	//alternating the class of tr
 	if ($alt){
-		echo "<tr>";
+		echo "<tr class='alt'>";
 		$alt = false;
 	} else {
-		echo "<tr class='alt'>";
+		echo "<tr>";
 		$alt = true;
 	}
 	
@@ -104,7 +108,7 @@
 		{
 			if (xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
-				document.getElementById("saveForwardResponse").innerHTML=xmlhttp.responseText;
+				document.getElementById("response").innerHTML=xmlhttp.responseText;
 				loadForwards();
 			}
 		}
@@ -134,7 +138,7 @@
 			{
 				if (xmlhttp.readyState==4 && xmlhttp.status==200)
 				{
-					document.getElementById("saveForwardResponse").innerHTML=xmlhttp.responseText;
+					document.getElementById("response").innerHTML=xmlhttp.responseText;
 					loadForwards();
 				}
 			}
@@ -144,10 +148,11 @@
 	}
 	</script>
 	
-	<div id='saveForwardResponse'></div>
-	<form name='new_forward' action='' method='get'>
-	Email address <input type='text' name='alias' size='30'> deliver to -> <input type='text' name='deliver_to' size='30'> <input type='button' value='Add' onClick='saveAlias()'>
-	</form>
 	
+	<form id='new_forward' action='' method='get'>
+	Email address <input type='text' name='alias' size='30'> deliver to -> <input type='text' name='deliver_to' size='30'> <a href='JavaScript:saveAlias()'>Add</a>
+	</form>
+	</div>
+	<div id='response'></div>
 </body>
 </html>

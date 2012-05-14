@@ -20,7 +20,7 @@
 	echo "<tr> <td>".$daten['deliver_to']."</td><td></td></tr>";
 		while ($daten2 = mysql_fetch_array( $db_erg2, MYSQL_ASSOC))
 		{
-			echo "<tr> <td> </td> <td>".$daten2['alias']."</td><td><a href='JavaScript: delAlias(".$daten2['alias_idnr'].");'>X</a></td></tr>";
+			echo "<tr> <td> </td> <td>".$daten2['alias']."</td><td><a class='forward_del' href='JavaScript: delAlias(".$daten2['alias_idnr'].");'>X</a></td></tr>";
 		}
 	echo "</table>";
 	$anzahl_eintraege = mysql_num_rows($db_erg2);

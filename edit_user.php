@@ -3,12 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  <head>
   <title>Details User</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
  </head>
+ <body>
+ <div id='content_container'>
  <?php include('db_connection.php'); ?>
  <?php include('menu.php'); ?>
  <h2>User</h2>
  <?php echo "<form action='edit_user_save.php?user_idnr=".$_GET['user_idnr']."' method='post'>"; ?>
-	<table border='0'>
+	
 		
  <?php
  // SQL-Query
@@ -18,6 +21,8 @@
 	if ( ! $db_erg ){
 		die('Ungültige Abfrage: ' . mysql_error());
 	}
+	
+	echo "<table id='user'>";
 	while ($daten = mysql_fetch_array( $db_erg, MYSQL_ASSOC))
 	{
     // Aushabe der Daten
@@ -25,24 +30,25 @@
 	$mbox_max_mb = round($daten['maxmail_size'] / 1048576, 2);
 	
     echo "<tr> <th>user_idnr</th> <td id='user_idnr'>".$daten['user_idnr']."</td> </tr>";
-	echo "<tr> <th>Name</th> <td><input name='name' type='text' value='".$daten['name']."' size='30'> </td> </tr>";
-	echo "<tr> <th>User ID</th> <td><input name='userid' type='text' value='".$daten['userid']."' size='30'></td> </tr>";
-	echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$daten['passwd']."' size='30'></td> <td>Type: <select name='encryption_type'><option>".$daten['encryption_type']."</option><option></option><option>md5</option></select></td> </tr>"; 
-	echo "<tr> <th>Mailbox size</th> <td>".$mbox_cur_mb." MB / <input name='maxmail_size' type='text' value='".$mbox_max_mb."' size='10'> MB</td> <td></td><td><i>0 means unlimited space.</i></td> </tr>";
+	echo "<tr> <th>Name</th> <td><input name='name' type='text' value='".$daten['name']."' size='30'> </td> <td><i>The full name of the user</i></td></tr>";
+	echo "<tr> <th>User ID</th> <td><input name='userid' type='text' value='".$daten['userid']."' size='30'></td><td><i>The ID/Login, e.g. user@domain.com</i></td> </tr>";
+	echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$daten['passwd']."' size='30'> Type: <select name='encryption_type'><option>".$daten['encryption_type']."</option><option></option><option>md5</option></select></td> <td><i>If you are using SASL the password has to be unencrypted.</i></td></tr>"; 
+	echo "<tr> <th>Mailbox size</th> <td>".$mbox_cur_mb." MB / <input name='maxmail_size' type='text' value='".$mbox_max_mb."' size='10'> MB</td> <td><i>0 means unlimited space.</i></td> </tr>";
 	echo "<tr> <th>Last Login</th> <td>".$daten['last_login']."</td> </tr>";
 	}
 
 ?>
 	</table>
-	<p>
-	<input type="submit" value="Send">
-    <input type="reset" value="Cancel">
-    </p>
+	<div id='form_buttons'>
+		<a href="javascript:document.forms['new_user'].submit()">Save</a>
+		<a href="javascript:document.forms['new_user'].reset()">Reset</a>
+	</div>
 	</form>
 		
 	<!-- DBMail aliases gruppiert nach deliver_to -->
 	
 	<h2>Aliases</h2>
+	
 	<script type="text/javascript">
 	function loadAliases()
 	{
@@ -84,7 +90,7 @@
 		{
 			if (xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
-				document.getElementById("saveAliasesResponse").innerHTML=xmlhttp.responseText;
+				document.getElementById("response").innerHTML=xmlhttp.responseText;
 				loadAliases();
 			}
 		}
@@ -114,7 +120,7 @@
 			{
 				if (xmlhttp.readyState==4 && xmlhttp.status==200)
 				{
-					document.getElementById("saveAliasesResponse").innerHTML=xmlhttp.responseText;
+					document.getElementById("response").innerHTML=xmlhttp.responseText;
 					loadAliases();
 				}
 			}
@@ -126,7 +132,7 @@
 	
 	
 	<div id='aliases'></div>
-	<div id='saveAliasesResponse'></div>
+	
 	<form id='new_alias' action='' method='post'>
 	<table>
 		<tr><td></td><td><input type='text' name='alias' size='30'></td><td><input type='button' value='Add' onClick='saveAlias()'></td></tr>
@@ -163,5 +169,8 @@
 	</script>
 	
 	<p><a href='javascript:delUser()'>Delete User</a> <i>At the moment only the entry in the user-table will be deleted! All other data like mails ect. will stay like a zombie!</i></p>
+	<div id='response'></div>
+	</div>
+	</body>
 </html>
  

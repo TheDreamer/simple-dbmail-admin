@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
  <head>
   <title>List Forwards</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
  </head>
  <body>
 	<?php include('db_connection.php'); ?>
@@ -15,30 +16,37 @@
 	if ( ! $db_erg ){
 		die('Ungültige Abfrage: ' . mysql_error());
 	}
-	//echo "<table>";
-	//echo "<tr> <th>deliver_to</th> <th>alias</th> </tr>";
-	echo "<ul>";
+	echo "<table id='forwards'>";
+	echo "<tr> <th>Deliver to</th> <th>Aliases</th></tr>";
+	$alt = false; // alter the class of tr
 	while ($daten = mysql_fetch_array( $db_erg, MYSQL_ASSOC))
 	{
-		// SQL-Befehl für den Zugriff
+		// MySQL-command
 		$sql2 = "SELECT * FROM dbmail_aliases WHERE deliver_to='".$daten['deliver_to']."'";
-		// ausführen des mysql-Befehls
+		// execute MySQL-command
 		$db_erg2 = mysql_query( $sql2 );
 		if ( ! $db_erg2 ){
 			die('Ungültige Abfrage: ' . mysql_error());
 		}
-		echo "<li>".$daten['deliver_to']."</li>";
-		echo "<ul>";
+		if ($alt){
+			echo "<tr class='alt'>";
+			$alt = false;
+		} else {
+			echo "<tr>";
+			$alt = true;
+		}
+		echo "<td>".$daten['deliver_to']."</td>";
+		echo "<td>";
 		while ($daten2 = mysql_fetch_array( $db_erg2, MYSQL_ASSOC))
 		{
-			echo "<li>".$daten2['alias']." <a href='JavaScript: delForward(".$daten2['alias_idnr'].");'>X</a></li>";
+			echo "".$daten2['alias']." <a class='forward_del' href='JavaScript: delForward(".$daten2['alias_idnr'].");'>X</a><br>";
 		}
-		echo "</ul>";
+		echo "</td></tr>";
 	}
-	echo "</ul>";
-	// Anzeige der Anzahl der Einträge
-	$anzahl_eintraege = mysql_num_rows($db_erg);
-	echo "<p>Number of Forwardaddresses: $anzahl_eintraege </p>";
+	echo "</table>";
+	// Show number of entries
+	$numberEntries = mysql_num_rows($db_erg);
+	echo "<p>Number of Forwardaddresses: ".$numberEntries."</p>";
 	?>
 </body>
 </html>
