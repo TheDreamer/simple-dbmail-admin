@@ -10,7 +10,7 @@
  <?php include('db_connection.php'); ?>
  <?php include('menu.php'); ?>
  <h2>User</h2>
- <?php echo "<form action='edit_user_save.php?user_idnr=".$_GET['user_idnr']."' method='post'>"; ?>
+ <?php echo "<form id='edit_user' action='edit_user_save.php?user_idnr=".$_GET['user_idnr']."' method='post'>"; ?>
 	
 		
  <?php
@@ -40,11 +40,14 @@
 ?>
 	</table>
 	<div id='form_buttons'>
-		<a href="javascript:document.forms['new_user'].submit()">Save</a>
-		<a href="javascript:document.forms['new_user'].reset()">Reset</a>
+		<a href="javascript:document.forms['edit_user'].submit()">Save</a>
+		<a href="javascript:document.forms['edit_user'].reset()">Reset</a>
 	</div>
 	</form>
 		
+	
+	<hr  align="left">
+	
 	<!-- DBMail aliases gruppiert nach deliver_to -->
 	
 	<h2>Aliases</h2>
@@ -133,10 +136,8 @@
 	
 	<div id='aliases'></div>
 	
-	<form id='new_alias' action='' method='post'>
-	<table>
-		<tr><td></td><td><input type='text' name='alias' size='30'></td><td><input type='button' value='Add' onClick='saveAlias()'></td></tr>
-	</table>
+	<form id='new_alias' action='' method='get'>
+			<input type='text' name='alias' size='30'><a href='JavaScript:saveAlias()'>Add</a>
 	</form>
 	
 	

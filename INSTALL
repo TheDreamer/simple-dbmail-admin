@@ -1,3 +1,9 @@
 Installation manual:
 
-edit the config.php
+Requierements:
+ - DBMail
+ - MySQL
+ - PHP
+
+
+Edit the config.php and add the login for MySQL to access the dbmail-tables.

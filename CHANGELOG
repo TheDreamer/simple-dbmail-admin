@@ -1,0 +1,11 @@
+since 20120507:
+ - Deleted the sieve-column, because it is not used from DBMail
+ - Deleted also the client_nr, domain column, because they are only usefull for ISP's
+ - Translatet a bit more into english.
+ - Put the configuration i an external config-file ( config.php )
+ - Added create and delete for users.
+ - Styled the menu and the user-table
+ - Fixed the translation
+ - Added the installation manual
+ - more Styling
+ 
