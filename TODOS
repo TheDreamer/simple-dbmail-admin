@@ -1,0 +1,18 @@
+TODOs:
+Version 1.0
+ - Namenspalte weg
+ - Logdaten anzeigen
+ - Benutzer löschen
+ - Backup
+ - Systembenutzer ausblenden
+ - Statt id Benutzernamen anzeigen
+ - Demo aufsetzten
+ - Desgine reaprieren
+ 
+Version 2.0: 
+ - YUI
+ - MVC
+ - internationalisierung
+ 
+ Version 3.0:
+ - eigene Tabelle für Login und Metadaten (Namen ect)

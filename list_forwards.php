@@ -10,7 +10,7 @@
 	
 	<?php
 	// SQL-Befehl für den Zugriff
-	$sql = "SELECT distinct deliver_to FROM dbmail_aliases";
+	$sql = "SELECT distinct deliver_to FROM dbmail_aliases WHERE deliver_to NOT IN (SELECT user_idnr from dbmail_users)";
 	// ausführen des mysql-Befehls
 	$db_erg = mysql_query( $sql );
 	if ( ! $db_erg ){

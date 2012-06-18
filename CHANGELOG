@@ -8,4 +8,10 @@ since 20120507:
  - Fixed the translation
  - Added the installation manual
  - more Styling
- 
+ since ???
+ - New menu items
+ 	- forwards
+ 	- users
+ - moved content from index
+ - hided system users from dbmail like "anyone", ...
+ - hided user id's from the forward table.
