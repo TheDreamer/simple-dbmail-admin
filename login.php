@@ -43,7 +43,7 @@
  <h1>Simple DBMail Admin</h1>
  <div id='login_dialog'>
   <div id='inner_login_dialog'>
-  <form action="login.php" method="post">
+  <form id='login' action="login.php" method="post">
   <table>
   <tr>
    <td>Username: </td><td><input id='username_tx' type="text" name="username" /></td>
@@ -51,7 +51,7 @@
    <td>Password: </td><td><input id='password_tx' type="password" name="password" /></td>
    </tr>
    </table>
-   <input id='login_bt' type="submit" value="Login" />
+   <a href="javascript:document.forms['login'].submit()" id='login_bt'>Login</a>
   </form>
   </div>
   </div>

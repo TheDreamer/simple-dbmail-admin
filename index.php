@@ -13,11 +13,12 @@
  
   <h1>Welcome to <b>Simple DBMail Admin</b></h1>
     
-<hr align="left">
+<hr align="left"></hr>
 
-
-  <?php include('db_connection.php'); ?> 
-	
+<p><b>Version: </b>20120618 - still beta</p>
+<p>You will find Updates <a href='http://code.google.com/p/simple-dbmail-admin/'>here</a>.</p>
+<p>Found a bug or missed a feature? Write an email to <a href='mailto:claaskaehler@gmail.com'>claaskaehler@gmail.com</a>!</p>
+ </div>
 	<div id='response'></div>
 </body>
 </html>

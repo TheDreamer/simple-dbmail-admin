@@ -1,4 +1,6 @@
-since 20120507:
+20120507: First release!
+
+20120527:
  - Deleted the sieve-column, because it is not used from DBMail
  - Deleted also the client_nr, domain column, because they are only usefull for ISP's
  - Translatet a bit more into english.
@@ -8,10 +10,15 @@ since 20120507:
  - Fixed the translation
  - Added the installation manual
  - more Styling
- since ???
+ 
+ 20120618:
  - New menu items
  	- forwards
  	- users
  - moved content from index
  - hided system users from dbmail like "anyone", ...
  - hided user id's from the forward table.
+ - deleted the 'name' column
+ - added the css to new_user_save.php, edit_user_save.php
+ - changed designe of login dialog
+ - added some informations to the index page

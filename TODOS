@@ -1,16 +1,16 @@
 TODOs:
 Version 1.0
- - Namenspalte weg
- - Logdaten anzeigen
  - Benutzer löschen
  - Backup
- - Systembenutzer ausblenden
  - Statt id Benutzernamen anzeigen
- - Demo aufsetzten
- - Desgine reaprieren
+ - Designe reaprieren <hr> Element Benutzer
+ - AJAX bei Benutzer editierung
  
-Version 2.0: 
- - YUI
+Version 1.1
+ - Edit Forward
+Version 2.0:
+ 
+ - YUI?
  - MVC
  - internationalisierung
  

@@ -15,7 +15,7 @@
 	
 	<h2>Users</h2>
 	<table id='users' border='1'>
-	<tr> <th>User ID</th> <th>User Name</th> <th>Mailbox storage</th> <th>last login</th> </tr>
+	<tr> <th>User ID</th> <th>Mailbox storage</th> <th>last login</th> </tr>
 	<?php	
 	// SQL-Query
 	$sql = "SELECT * FROM dbmail_users WHERE userid NOT IN ('__@!internal_delivery_user!@__', 'anyone', '__public__')";
@@ -39,7 +39,7 @@
 		$alt = true;
 	}
 	
-	echo "<td><a href='edit_user.php?user_idnr=".$daten['user_idnr']."'>".$daten['userid']."</a></td> <td>".$daten['name']."</td> <td>".$mbox_cur_mb." MB / ".$mbox_max_mb." MB</td> <td>".$daten['last_login']."</td></tr>";
+	echo "<td><a href='edit_user.php?user_idnr=".$daten['user_idnr']."'>".$daten['userid']."</a></td> <td>".$mbox_cur_mb." MB / ".$mbox_max_mb." MB</td> <td>".$daten['last_login']."</td></tr>";
 	}
 	echo "</table>";
 	

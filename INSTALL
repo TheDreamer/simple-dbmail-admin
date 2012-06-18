@@ -5,5 +5,7 @@ Requierements:
  - MySQL
  - PHP
 
+Installation:
+Edit the config.php 
 
-Edit the config.php and add the login for MySQL to access the dbmail-tables.
+finish! :D
