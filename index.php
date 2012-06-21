@@ -12,8 +12,7 @@
  <div id="content_container">
  
   <h1>Welcome to <b>Simple DBMail Admin</b></h1>
-    
-<hr align="left"></hr>
+
 
 <p><b>Version: </b>20120618 - still beta</p>
 <p>You will find Updates <a href='http://code.google.com/p/simple-dbmail-admin/'>here</a>.</p>

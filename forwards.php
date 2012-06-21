@@ -100,10 +100,11 @@
 	}
 	</script>
 	
-	
+	<div id='new_forward_container'>
 	<form id='new_forward' action='' method='get'>
-	Email address <input type='text' name='alias' size='30'> deliver to -> <input type='text' name='deliver_to' size='30'> <a href='JavaScript:saveAlias()'>Add</a>
+	<div id='lb_email_adress'>Email address </div><input type='text' name='alias' size='30'><div id='lb_deliver_to'> deliver to -> </div><input type='text' name='deliver_to' size='30'> <a href='JavaScript:saveAlias()'>Add</a>
 	</form>
+	</div>
 	</div>
 	<div id='response'></div>
 </body>

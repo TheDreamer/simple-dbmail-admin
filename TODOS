@@ -2,14 +2,15 @@ TODOs:
 Version 1.0
  - Benutzer löschen
  - Backup
- - Statt id Benutzernamen anzeigen
- - Designe reaprieren <hr> Element Benutzer
  - AJAX bei Benutzer editierung
  
 Version 1.1
  - Edit Forward
+
+Version 1.2
+ - Aliases in Forwards anzeigen
+
 Version 2.0:
- 
  - YUI?
  - MVC
  - internationalisierung

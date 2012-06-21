@@ -45,7 +45,7 @@
 	</form>
 		
 	
-	<hr  align="left">
+	<hr  align="left"></hr>
 	
 	<!-- DBMail aliases gruppiert nach deliver_to -->
 	
@@ -133,11 +133,14 @@
 	</script>
 	
 	
-	<div id='aliases'></div>
+	<div id='aliases'>
+	</div>
 	
+	<div id='new_alias_container'>
 	<form id='new_alias' action='' method='get'>
 			<input type='text' name='alias' size='30'><a href='JavaScript:saveAlias()'>Add</a>
 	</form>
+	</div>
 	
 	
 	<!-- AJAX-Script for deleting a Alias -->
