@@ -9,25 +9,23 @@
 	<?php include('db_connection.php'); ?>
 	
 	<?php
-	// SQL-Befehl für den Zugriff
-	$sql = "SELECT distinct deliver_to FROM dbmail_aliases WHERE deliver_to NOT IN (SELECT user_idnr from dbmail_users)";
-	// ausführen des mysql-Befehls
-	$db_erg = mysql_query( $sql );
-	if ( ! $db_erg ){
-		die('Ungültige Abfrage: ' . mysql_error());
-	}
+	// Select all targets for fowards, except local users
+	$STH = $DBH->query('SELECT distinct deliver_to FROM dbmail_aliases WHERE deliver_to NOT IN (SELECT user_idnr from dbmail_users)');
+	# setting the fetch mode
+	$STH->setFetchMode(PDO::FETCH_ASSOC);
+	
+	
 	echo "<table id='forwards'>";
 	echo "<tr> <th>Deliver to</th> <th>Aliases</th></tr>";
 	$alt = false; // alter the class of tr
-	while ($daten = mysql_fetch_array( $db_erg, MYSQL_ASSOC))
+	while ($row = $STH->fetch())
 	{
-		// MySQL-command
-		$sql2 = "SELECT * FROM dbmail_aliases WHERE deliver_to='".$daten['deliver_to']."'";
-		// execute MySQL-command
-		$db_erg2 = mysql_query( $sql2 );
-		if ( ! $db_erg2 ){
-			die('Ungültige Abfrage: ' . mysql_error());
-		}
+		// Select all forwards to that selected target
+		$STH2 = $DBH->query("SELECT * FROM dbmail_aliases WHERE deliver_to='".$row['deliver_to']."'");
+		# setting the fetch mode
+		$STH2->setFetchMode(PDO::FETCH_ASSOC);
+		
+		
 		if ($alt){
 			echo "<tr class='alt'>";
 			$alt = false;
@@ -35,18 +33,21 @@
 			echo "<tr>";
 			$alt = true;
 		}
-		echo "<td>".$daten['deliver_to']."</td>";
+		echo "<td>".$row['deliver_to']."</td>";
 		echo "<td>";
-		while ($daten2 = mysql_fetch_array( $db_erg2, MYSQL_ASSOC))
+		while ($row2 = $STH2->fetch())
 		{
-			echo "".$daten2['alias']." <a class='forward_del' href='JavaScript: delForward(".$daten2['alias_idnr'].");'>X</a><br>";
+			echo "".$row2['alias']." <a class='forward_del' href='JavaScript: delForward(".$row2['alias_idnr'].");'>X</a><br>";
 		}
 		echo "</td></tr>";
 	}
 	echo "</table>";
 	// Show number of entries
-	$numberEntries = mysql_num_rows($db_erg);
+	$numberEntries = $STH->rowCount();
 	echo "<p>Number of Forwardaddresses: ".$numberEntries."</p>";
+	
+	# close the database connection
+	$DBH = null;
 	?>
 </body>
 </html>
