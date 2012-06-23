@@ -2,10 +2,12 @@ Installation manual:
 
 Requierements:
  - DBMail
- - MySQL
- - PHP
+ - MySQL or PostgreSQL
+ - Apache or nginx... or whatever.
+ - PHP <= 5.3 
 
 Installation:
-Edit the config.php 
+ - Copy it into a folder with web-access.
+ - Edit the config.php 
 
 finish! :D
