@@ -10,44 +10,46 @@
 	
 	<?php
 	// Select all targets for fowards, except local users
-	$STH = $DBH->query('SELECT distinct deliver_to FROM dbmail_aliases WHERE deliver_to NOT IN (SELECT user_idnr from dbmail_users)');
-	# setting the fetch mode
-	$STH->setFetchMode(PDO::FETCH_ASSOC);
-	
-	
-	echo "<table id='forwards'>";
-	echo "<tr> <th>Deliver to</th> <th>Aliases</th></tr>";
-	$alt = false; // alter the class of tr
-	while ($row = $STH->fetch())
-	{
-		// Select all forwards to that selected target
-		$STH2 = $DBH->query("SELECT * FROM dbmail_aliases WHERE deliver_to='".$row['deliver_to']."'");
+	try {
+		$STH = $DBH->query('SELECT distinct deliver_to FROM dbmail_aliases WHERE deliver_to NOT IN (SELECT user_idnr from dbmail_users)');
 		# setting the fetch mode
-		$STH2->setFetchMode(PDO::FETCH_ASSOC);
+		$STH->setFetchMode(PDO::FETCH_ASSOC);
 		
 		
-		if ($alt){
-			echo "<tr class='alt'>";
-			$alt = false;
-		} else {
-			echo "<tr>";
-			$alt = true;
-		}
-		echo "<td>".$row['deliver_to']."</td>";
-		echo "<td>";
-		while ($row2 = $STH2->fetch())
+		echo "<table id='forwards'>";
+		echo "<tr> <th>Deliver to</th> <th>Aliases</th></tr>";
+		$alt = false; // alter the class of tr
+		while ($row = $STH->fetch())
 		{
-			echo "".$row2['alias']." <a class='forward_del' href='JavaScript: delForward(".$row2['alias_idnr'].");'>X</a><br>";
+			// Select all forwards to that selected target
+			$STH2 = $DBH->query("SELECT * FROM dbmail_aliases WHERE deliver_to='".$row['deliver_to']."'");
+			# setting the fetch mode
+			$STH2->setFetchMode(PDO::FETCH_ASSOC);
+			
+			
+			if ($alt){
+				echo "<tr class='alt'>";
+				$alt = false;
+			} else {
+				echo "<tr>";
+				$alt = true;
+			}
+			echo "<td>".$row['deliver_to']."</td>";
+			echo "<td>";
+			while ($row2 = $STH2->fetch())
+			{
+				echo "".$row2['alias']." <a class='forward_del' href='JavaScript: delForward(".$row2['alias_idnr'].");'>X</a><br>";
+			}
+			echo "</td></tr>";
 		}
-		echo "</td></tr>";
-	}
-	echo "</table>";
-	// Show number of entries
-	$numberEntries = $STH->rowCount();
-	echo "<p>Number of Forwardaddresses: ".$numberEntries."</p>";
+		echo "</table>";
+		// Show number of entries
+		$numberEntries = $STH->rowCount();
+		echo "<p>Number of Forwardaddresses: ".$numberEntries."</p>";
 	
-	# close the database connection
-	$DBH = null;
+	} catch (PDOException $e){
+		echo "Can not do that: " + $e->getMessage();
+ 	}
 	?>
 </body>
 </html>

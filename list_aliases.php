@@ -7,26 +7,24 @@
 <body>
  <?php include('db_connection.php'); ?>
 <?php
+try {
+	$STH = $DBH->prepare('SELECT * FROM dbmail_aliases WHERE deliver_to= :deliver_to');
+	$STH->bindParam(':deliver_to', $_GET['user_idnr']);
+	$STH->execute();
+	# setting the fetch mode
+	$STH->setFetchMode(PDO::FETCH_ASSOC);
 	
-	// SQL-Befehl für den Zugriff
-	$sql2 = "SELECT * FROM dbmail_aliases WHERE deliver_to='".$_GET['user_idnr']."'";
-	// ausführen des mysql-Befehls
-	$db_erg2 = mysql_query( $sql2 );
-	if ( ! $db_erg2 ){
-		die('Ungültige Abfrage: ' . mysql_error());
-	}
 	echo "<table>";
-	echo "<tr><th>Alias:</th></tr>";
-	echo "<tr> <td>".$daten['deliver_to']."</td><td></td></tr>";
-		while ($daten2 = mysql_fetch_array( $db_erg2, MYSQL_ASSOC))
+		while ($row = $STH->fetch())
 		{
-			echo "<tr> <td> </td> <td>".$daten2['alias']."</td><td><a class='forward_del' href='JavaScript: delAlias(".$daten2['alias_idnr'].");'>X</a></td></tr>";
+			echo "<tr> <td>".$row['alias']."</td><td><a class='forward_del' href='JavaScript: delAlias(".$row['alias_idnr'].");'>X</a></td></tr>";
 		}
 	echo "</table>";
-	$anzahl_eintraege = mysql_num_rows($db_erg2);
-	
-	echo "<p>Number of Aliases: $anzahl_eintraege </p>";
-	
+	$numberEntries = $STH->rowCount();
+	echo "<p>Number of Aliases: $numberEntries </p>";
+} catch (PDOException $e){
+	echo "Can not do that: " + $e->getMessage();
+}
 	
 	
 ?>

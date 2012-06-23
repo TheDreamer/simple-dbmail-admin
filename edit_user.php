@@ -10,32 +10,31 @@
  <?php include('db_connection.php'); ?>
  <?php include('menu.php'); ?>
  <h2>User</h2>
- <?php echo "<form id='edit_user' action='edit_user_save.php?user_idnr=".$_GET['user_idnr']."' method='post'>"; ?>
 	
 		
  <?php
- // SQL-Query
-	$sql = "SELECT * FROM dbmail_users WHERE user_idnr=".$_GET['user_idnr'];
-	// ausführen der Query
-	$db_erg = mysql_query( $sql );
-	if ( ! $db_erg ){
-		die('Ungültige Abfrage: ' . mysql_error());
-	}
-	
-	echo "<table id='user'>";
-	while ($daten = mysql_fetch_array( $db_erg, MYSQL_ASSOC))
-	{
-    // Aushabe der Daten
-	$mbox_cur_mb = round($daten['curmail_size'] / 1048576, 2);
-	$mbox_max_mb = round($daten['maxmail_size'] / 1048576, 2);
-	
-    echo "<tr> <th>user_idnr</th> <td id='user_idnr'>".$daten['user_idnr']."</td> </tr>";
-	echo "<tr> <th>User ID</th> <td><input name='userid' type='text' value='".$daten['userid']."' size='30'></td><td><i>The ID/Login, e.g. user@domain.com</i></td> </tr>";
-	echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$daten['passwd']."' size='30'> Type: <select name='encryption_type'><option>".$daten['encryption_type']."</option><option></option><option>md5</option></select></td> <td><i>If you are using SASL the password has to be unencrypted.</i></td></tr>"; 
-	echo "<tr> <th>Mailbox size</th> <td>".$mbox_cur_mb." MB / <input name='maxmail_size' type='text' value='".$mbox_max_mb."' size='10'> MB</td> <td><i>0 means unlimited space.</i></td> </tr>";
-	echo "<tr> <th>Last Login</th> <td>".$daten['last_login']."</td> </tr>";
-	}
-
+ 	echo "<form id='edit_user' action='edit_user_save.php?user_idnr=".$_GET['user_idnr']."' method='post'>";
+ 	echo "<table id='user'>";
+ 	try {
+ 		$STH = $DBH->prepare('SELECT * FROM dbmail_users WHERE user_idnr=:user_idnr');
+ 		$STH->bindParam(':user_idnr', $_GET['user_idnr']);
+ 		$STH->execute();
+ 		$STH->setFetchMode(PDO::FETCH_ASSOC);
+ 		while ($row = $STH->fetch()) {
+	    
+	 		// calculating a human readable number for the mailbox size
+ 			$mbox_cur_mb = round($row['curmail_size'] / 1048576, 2);
+			$mbox_max_mb = round($row['maxmail_size'] / 1048576, 2);
+			
+		    echo "<tr> <th>user_idnr</th> <td id='user_idnr'>".$row['user_idnr']."</td> </tr>";
+			echo "<tr> <th>User ID</th> <td><input name='userid' type='text' value='".$row['userid']."' size='30'></td><td><i>The ID/Login, e.g. user@domain.com</i></td> </tr>";
+			echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$row['passwd']."' size='30'> Type: <select name='encryption_type'><option>".$row['encryption_type']."</option><option></option><option>md5</option></select></td> <td><i>If you are using SASL the password has to be unencrypted.</i></td></tr>"; 
+			echo "<tr> <th>Mailbox size</th> <td>".$mbox_cur_mb." MB / <input name='maxmail_size' type='text' value='".$mbox_max_mb."' size='10'> MB</td> <td><i>0 means unlimited space.</i></td> </tr>";
+			echo "<tr> <th>Last Login</th> <td>".$row['last_login']."</td> </tr>";
+		}
+ 	} catch (PDOException $e){
+		echo "Can not do that: " + $e->getMessage();
+ 	}
 ?>
 	</table>
 	<div id='form_buttons'>
@@ -47,7 +46,7 @@
 	
 	<hr  align="left"></hr>
 	
-	<!-- DBMail aliases gruppiert nach deliver_to -->
+	<!-- DBMail aliases grouped by deliver_to -->
 	
 	<h2>Aliases</h2>
 	

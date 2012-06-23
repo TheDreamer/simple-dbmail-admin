@@ -22,3 +22,7 @@
  - added the css to new_user_save.php, edit_user_save.php
  - changed designe of login dialog
  - added some informations to the index page
+ 20120623:
+ - CSS improvments
+ - SQL improvments, migrate everything to POD
+ - PostgreSQL support

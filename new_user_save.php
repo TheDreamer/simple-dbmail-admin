@@ -13,13 +13,18 @@
 	//calculate the Byte value insted of MB
 	$mbox_max = $_POST['maxmail_size'] * 1048576;
 	
-	$sql = "INSERT INTO dbmail_users SET userid='".$_POST['userid']."', passwd='".$_POST['passwd']."', encryption_type='".$_POST['encryption_type']."', maxmail_size='".$mbox_max."'"; 
-	// ausführen der Query
-	$db_erg = mysql_query( $sql );
-	if ( ! $db_erg ){
-		die('Error: ' . mysql_error());
-	} else {
+	try {
+		$STH = $DBH->prepare("INSERT INTO dbmail_users SET userid= :userid, passwd= :passwd, encryption_type= :encryption_type, maxmail_size= :maxmail_size");
+		$STH->bindParam(':userid', $_POST['userid']);
+		$STH->bindParam(':passwd', $_POST['passwd']);
+		$STH->bindParam(':encryption_type', $_POST['encryption_type']);
+		$STH->bindParam(':maxmail_size', $mbox_max);
+		
+		$STH->execute();
+	
 		echo "User created! <a href='users.php'>back</a>";
+	} catch (PDOException $e){
+		echo "Can not do that: " + $e->getMessage();
 	}
 ?>
 </body>
