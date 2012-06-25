@@ -24,7 +24,7 @@
 	
 		echo "User created! <a href='users.php'>back</a>";
 	} catch (PDOException $e){
-		echo "Can not do that: " + $e->getMessage();
+		echo "Can not do that: " . $e->getMessage();
 	}
 ?>
 </body>

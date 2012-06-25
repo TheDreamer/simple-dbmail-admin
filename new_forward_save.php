@@ -17,7 +17,7 @@
  	echo "New forward/alias added! ".$_POST['alias']." -> ".$_POST['deliver_to'];
  
  	} catch (PDOException $e){
- 		echo "Can not do that: " + $e->getMessage();
+ 		echo "Can not do that: " . $e->getMessage();
  	} 	
 ?>
 </body>

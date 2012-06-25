@@ -26,3 +26,7 @@
  - CSS improvments
  - SQL improvments, migrate everything to POD
  - PostgreSQL support
+ 20120625
+ - Bugfixes
+ - AJAX for editing an user
+ - Statistics-section at the hompage

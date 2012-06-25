@@ -45,7 +45,7 @@
 		$numberEntries = $STH->rowCount();
 		echo "<p>Number of users: $numberEntries </p>";
 	} catch (PDOException $e){
-		echo "Can not do that: " + $e->getMessage();
+		echo "Can not do that: " . $e->getMessage();
 	}
 	
 	?>

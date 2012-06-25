@@ -1,9 +1,10 @@
 TODOs:
 Version 1.0
- - Benutzer löschen
- - Backup
- - AJAX bei Benutzer editierung
- 
+ - AJAX bei neuem Benutzer
+ - AJAX login
+ - Encrytption options at they userpage
+ - Test mit PostgreSQL
+  
 Version 1.1
  - Edit Forward
  - PDO http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
@@ -18,4 +19,5 @@ Version 2.0:
  - internationalisierung
  
  Version 3.0:
+ - Backup
  - eigene Tabelle für Login und Metadaten (Namen ect)

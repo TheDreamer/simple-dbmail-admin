@@ -10,12 +10,23 @@
  <?php 
  
  try {
- 	$sql = "DELETE FROM dbmail_users WHERE user_idnr='".$_GET['user_idnr']."'"; 
- 	// execute query
- 	$db_erg = $DBH->exec( $sql );
+ 	$DBH->beginTransaction();
+ 	
+ 	$STH1 = $DBH->prepare('DELETE FROM dbmail_aliases WHERE deliver_to=:deliver_to');
+ 	$STH1->bindParam(':deliver_to', $_GET['user_idnr']);
+ 	$STH1->execute();
+ 	
+ 	$STH2 = $DBH->prepare('DELETE FROM dbmail_users WHERE user_idnr=:deliver_to');
+ 	$STH2->bindParam(':deliver_to', $_GET['user_idnr']);
+ 	$STH2->execute();
+ 	
+ 	$DBH->commit();
+ 	
+ 	
  	echo "User deleted! <a href='index.php'>back</a>";
  } catch (PDOException $e){
- 	echo "Can not do that: " + $e->getMessage();
+ 	$DBH->rollBack();
+ 	echo "Can not do that: " . $e->getMessage();
  }
  
 

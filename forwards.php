@@ -72,7 +72,7 @@
 		xmlhttp.send(params);
 	}
 	</script>
-	<!-- AJAX-Script for deleting a Forward -->
+	<!-- AJAX-Script for deleting a forward -->
 	<script type="text/javascript">
 	function delForward(alias_idnr)
 	{

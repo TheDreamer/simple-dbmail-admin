@@ -38,9 +38,11 @@
 ?>
 	</table>
 	<div id='form_buttons'>
-		<a href="javascript:document.forms['edit_user'].submit()">Save</a>
-		<a href="javascript:document.forms['edit_user'].reset()">Reset</a>
+		<a href="javascript:saveUser()">Save</a>
+		<a href="javascript:document.forms['edit_user'].reset()">Reset Changes</a>
+		<a href='javascript:delUser()'>Delete User</a>
 	</div>
+	
 	</form>
 		
 	
@@ -49,6 +51,7 @@
 	<!-- DBMail aliases grouped by deliver_to -->
 	
 	<h2>Aliases</h2>
+
 	
 	<script type="text/javascript">
 	function loadAliases()
@@ -71,10 +74,44 @@
 		xmlhttp.open("GET","list_aliases.php?user_idnr=" + document.getElementById('user_idnr').innerHTML,true);
 		xmlhttp.send();
 	}
-	
 	loadAliases();
-	
 	</script>
+
+	<!-- AJAX-Script for saving an user -->
+	<script type="text/javascript">
+	function saveUser()
+	{
+		var params = "user_idnr=" + document.getElementById('user_idnr').innerHTML 
+			+ "&userid=" + document.forms.edit_user.userid.value
+			+ "&passwd=" + document.forms.edit_user.passwd.value
+			+ "&encryption_type=" + document.forms.edit_user.encryption_type.value
+			+ "&maxmail_size=" + document.forms.edit_user.maxmail_size.value;
+		
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				document.getElementById("response").innerHTML=xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open("POST","edit_user_save.php",true);
+		//Send the proper header information along with the request
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.setRequestHeader("Content-length", params.length);
+		xmlhttp.setRequestHeader("Connection", "close");
+		xmlhttp.send(params);
+	}
+	</script>
+	
+	<!-- AJAX-Script for saving an alias -->
 	<script type="text/javascript">
 	function saveAlias()
 	{
@@ -103,7 +140,7 @@
 		xmlhttp.send(params);
 	}
 	</script>
-	<!-- AJAX-Script for deleting a Alias -->
+	<!-- AJAX-Script for deleting an alias -->
 	<script type="text/javascript">
 	function delAlias(alias_idnr)
 	{
@@ -160,8 +197,7 @@
 			{
 				if (xmlhttp.readyState==4 && xmlhttp.status==200)
 				{
-					alert('User deleted!');
-					window.location.href='index.php';
+					window.location.href='users.php';
 				}
 			}
 			xmlhttp.open("GET","del_user.php?user_idnr=" + document.getElementById('user_idnr').innerHTML,true);
@@ -170,7 +206,6 @@
 	}
 	</script>
 	
-	<p><a href='javascript:delUser()'>Delete User</a> <i>At the moment only the entry in the user-table will be deleted! All other data like mails ect. will stay like a zombie!</i></p>
 	<div id='response'></div>
 	</div>
 	</body>

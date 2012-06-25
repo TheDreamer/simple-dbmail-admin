@@ -15,7 +15,7 @@
 	$STH->execute();
 	echo "Forward/Alias deleted!";
  } catch (PDOException $e){
-	echo "Can not do that: " + $e->getMessage();
+	echo "Can not do that: " . $e->getMessage();
  }
 
 ?>
