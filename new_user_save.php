@@ -14,7 +14,7 @@
 	$mbox_max = $_POST['maxmail_size'] * 1048576;
 	
 	try {
-		$STH = $DBH->prepare("INSERT INTO dbmail_users SET userid= :userid, passwd= :passwd, encryption_type= :encryption_type, maxmail_size= :maxmail_size");
+		$STH = $DBH->prepare("INSERT INTO dbmail_users (userid, passwd, encryption_type, maxmail_size) VALUES (:userid, :passwd, :encryption_type, :maxmail_size)");
 		$STH->bindParam(':userid', $_POST['userid']);
 		$STH->bindParam(':passwd', $_POST['passwd']);
 		$STH->bindParam(':encryption_type', $_POST['encryption_type']);

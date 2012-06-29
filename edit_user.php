@@ -173,13 +173,14 @@
 	</div>
 	
 	<div id='new_alias_container'>
-	<form id='new_alias' action='' method='get'>
+	<form id='new_alias' action='JavaScript:saveAlias()' method='post'>
 			<input type='text' name='alias' size='30'><a href='JavaScript:saveAlias()'>Add</a>
 	</form>
 	</div>
+	<!-- Keylistener 'press the enter-key to create a new alias, if the form is fucused'. -->
+  
 	
-	
-	<!-- AJAX-Script for deleting a Alias -->
+	<!-- AJAX-Script for deleting an user -->
 	<script type="text/javascript">
 	function delUser()
 	{

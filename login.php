@@ -2,9 +2,9 @@
      require_once ('config.php');
 
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      
       session_start();
-
-      $username = $_POST['username'];
+	  $username = $_POST['username'];
       $password = $_POST['password'];
 
       $hostname = $_SERVER['HTTP_HOST'];
@@ -12,7 +12,8 @@
 
       // check login and password
       if ($username == SDBMA_LOGIN && $password == SDBMA_PASSWORD) {
-       $_SESSION['logedIn'] = true;
+      	$loginfailed = false;
+      	$_SESSION['logedIn'] = true;
 
        // forward to startpage
        if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
@@ -26,10 +27,11 @@
 
        header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/index.php');
        exit;
+       } else {
+       		$loginfailed=true;
        }
       }
 ?>
-
 
 
 
@@ -53,8 +55,33 @@
    </table>
    <a href="javascript:document.forms['login'].submit()" id='login_bt'>Login</a>
   </form>
+  <?php ?>
+  <div id='response'>
+  <?php 
+  	if($loginfailed){ 
+  		echo "Login for $username failed!";
+    } 
+    ?>
   </div>
   </div>
+  </div>
+  
+  <!-- Keylistener 'press the enter-key to login if the form is fucused'. -->
+  <script type="text/javascript">
+	function keydown (event){
+	  if (!event)
+	   event = window.event;
+		  if (event.which) {
+		    keycode = event.which;
+		  } else if (event.keyCode) {
+		    keycode = event.keyCode;
+		  }
+	   if (keycode == 13){
+		  document.forms['login'].submit();
+	   }
+	}
+	document.forms['login'].onkeydown = keydown;
+ </script>
   
  </body>
 </html>

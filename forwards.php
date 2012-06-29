@@ -100,12 +100,31 @@
 	}
 	</script>
 	
+	
 	<div id='new_forward_container'>
-	<form id='new_forward' action='' method='get'>
+	<form id='new_forward' action='JavaScript:saveAlias()' method='post'>
 	<div id='lb_email_adress'>Email address </div><input type='text' name='alias' size='30'><div id='lb_deliver_to'> deliver to -> </div><input type='text' name='deliver_to' size='30'> <a href='JavaScript:saveAlias()'>Add</a>
 	</form>
 	</div>
 	</div>
+<!-- Keylistener 'press the enter-key to create a new forward, if the form is fucused'. -->
+  <script type="text/javascript">
+	function keydown (event){
+	  if (!event)
+	   event = window.event;
+		  if (event.which) {
+		    keycode = event.which;
+		  } else if (event.keyCode) {
+		    keycode = event.keyCode;
+		  }
+	   if (keycode == 13){
+		   saveAlias();
+	   }
+	}
+	document.forms['new_forward'].onkeydown = keydown;
+ </script>
+		
+	
 	<div id='response'></div>
 </body>
 </html>

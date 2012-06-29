@@ -9,7 +9,7 @@
  
  <?php 
  try {
- 	$STH = $DBH->prepare("INSERT INTO dbmail_aliases SET alias= :alias, deliver_to= :deliver_to");
+ 	$STH = $DBH->prepare("INSERT INTO dbmail_aliases (alias, deliver_to) VALUES (:alias, :deliver_to)");
  	$STH->bindParam(':alias', $_POST['alias']);
  	$STH->bindParam(':deliver_to', $_POST['deliver_to']);
  	

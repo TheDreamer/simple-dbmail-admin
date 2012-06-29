@@ -26,7 +26,10 @@
  - CSS improvments
  - SQL improvments, migrate everything to POD
  - PostgreSQL support
- 20120625
+ 20120629
  - Bugfixes
  - AJAX for editing an user
  - Statistics-section at the hompage
+ - Enabled the enter-key for submit formulars.
+ - improved the loginpage
+ - Bugfixed PostgreSQL
