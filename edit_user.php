@@ -28,7 +28,41 @@
 			
 		    echo "<tr> <th>user_idnr</th> <td id='user_idnr'>".$row['user_idnr']."</td> </tr>";
 			echo "<tr> <th>User ID</th> <td><input name='userid' type='text' value='".$row['userid']."' size='30'></td><td><i>The ID/Login, e.g. user@domain.com</i></td> </tr>";
-			echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$row['passwd']."' size='30'> Type: <select name='encryption_type'><option>".$row['encryption_type']."</option><option></option><option>md5</option></select></td> <td><i>If you are using SASL the password has to be unencrypted.</i></td></tr>"; 
+			echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$row['passwd']."' size='30'> Type: ";
+			echo "<select name='encryption_type'>";
+			if ($row['encryption_type'] == "" or $row['encryption_type'] == "")
+				echo "<option name='plaintext' selected='selected'>plaintext</option>";
+			else
+				echo "<option name='plaintext'>plaintext</option>";
+			if ($row['encryption_type'] == "md5-hash")
+				echo "<option name='md5-hash' selected='selected'>md5-hash</option>";
+			else
+				echo "<option name='md5-hash'>md5-hash</option>";
+			if ($row['encryption_type'] == "md5-digest")
+				echo "<option name='md5-digest' selected='selected'>md5-digest</option>";
+			else
+				echo "<option name='md5-digest'>md5-digest</option>";
+			if ($row['encryption_type'] == "md5-digest")
+				echo "<option name='whirlpool' selected='selected'>whirlpool</option>";
+			else
+				echo "<option name='whirlpool'>whirlpool</option>";
+			if ($row['encryption_type'] == "sha512")
+				echo "<option name='sha512' selected='selected'>sha512</option>";
+			else
+				echo "<option name='sha512'>sha512</option>";
+			if ($row['encryption_type'] == "sha256")
+				echo "<option name='sha256' selected='selected'>sha256</option>";
+			else
+				echo "<option name='sha256'>sha256</option>";
+			if ($row['encryption_type'] == "sha256")
+				echo "<option name='sha1' selected='selected'>sha1</option>";
+			else
+				echo "<option name='sha1'>sha1</option>";
+			if ($row['encryption_type'] == "tiger")
+				echo "<option name='tiger' selected='selected'>tiger</option>";
+			else
+				echo "<option name='tiger'>tiger</option>";
+			echo "</select></td> <td><i>If you are using SASL the password has to be plaintext.</i></td></tr>"; 
 			echo "<tr> <th>Mailbox size</th> <td>".$mbox_cur_mb." MB / <input name='maxmail_size' type='text' value='".$mbox_max_mb."' size='10'> MB</td> <td><i>0 means unlimited space.</i></td> </tr>";
 			echo "<tr> <th>Last Login</th> <td>".$row['last_login']."</td> </tr>";
 		}
