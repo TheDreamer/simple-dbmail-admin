@@ -1,13 +1,21 @@
-Installation manual:
+INTRODUCTION
+============
+his file describes the basic steps to install Simple DBMail Admin on your
+web server. For additional information, write an Email at claas.kaehler@akator.de
 
-Requierements:
- - DBMail
- - MySQL or PostgreSQL
- - Apache or nginx... or whatever.
- - PHP <= 5.3 
 
-Installation:
- - Copy it into a folder with web-access.
- - Edit the config.php 
 
-finished! :D
+REQUIREMENTS
+============
+ * DBMail
+ * MySQL or PostgreSQL
+ * Apache or nginx... or whatever.
+ * PHP <= 5.3 
+
+
+INSTALLATION
+============
+
+1. Decompress and put this folder somewhere inside your document root
+2. Edit the config.php and enter your database config and enter the loging data for the webinterface
+7. Done!

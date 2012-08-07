@@ -14,7 +14,8 @@
  
   <h1>Welcome to <b>Simple DBMail Admin</b></h1>
 
-
+<div id='version'><b>Version: </b>1.0 RC2 - You will find updates <a href='http://code.google.com/p/simple-dbmail-admin/'>here</a>.</div>
+  
 <h2>Statistics</h2>
 <table id='statistics'>
  <?php
@@ -49,9 +50,6 @@
 
 <br></br>
 
-<p><b>Version: </b>20120629 - release candidate!</p>
-<p>You will find Updates <a href='http://code.google.com/p/simple-dbmail-admin/'>here</a>.</p>
-<p>Found a bug or missed a feature? Write an email to <a href='mailto:claaskaehler@gmail.com'>claaskaehler@gmail.com</a>!</p>
  </div>
 	<div id='response'></div>
 </body>

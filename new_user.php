@@ -5,8 +5,10 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <title>New User</title>
  </head>
+ <body>
  <?php include('db_connection.php'); ?>
  <?php include('menu.php'); ?>
+ <div id="content_container">
  <h2>New User</h2>
 <form action='new_user_save.php' id='new_user' method='post'>
 	<table id='user'>
@@ -27,11 +29,48 @@
 	
 	</table>
 	<div id='form_buttons'>
-	<a href="javascript:document.forms['new_user'].submit()">Add</a>
+	<a href="javascript:saveUser()">Add</a>
 	<a href="javascript:document.forms['new_user'].reset()">Reset</a>
 	</div>
     </form>
-
+	
+	<!-- AJAX-Script for saving an user -->
+	<script type="text/javascript">
+	function saveUser()
+	{
+		var params = "userid=" + document.forms.new_user.userid.value
+			+ "&passwd=" + document.forms.new_user.passwd.value
+			+ "&encryption_type=" + document.forms.new_user.encryption_type.value
+			+ "&maxmail_size=" + document.forms.new_user.maxmail_size.value;
+		
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				window.location.href='users.php';
+			}
+		}
+		xmlhttp.open("POST","new_user_save.php",true);
+		//Send the proper header information along with the request
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.setRequestHeader("Content-length", params.length);
+		xmlhttp.setRequestHeader("Connection", "close");
+		xmlhttp.send(params);
+	}
+	</script>
+    
+    
+    
+   <div id='response'></div>
+   </div>
 </body>
 </html>
  

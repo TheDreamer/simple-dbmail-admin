@@ -7,7 +7,6 @@
  </head>
 <body>
  <?php include('db_connection.php'); ?>
- <?php include('menu.php'); ?>
   
  <?php 
 	//calculate the Byte value insted of MB
@@ -22,7 +21,7 @@
 		
 		$STH->execute();
 	
-		echo "User created! <a href='users.php'>back</a>";
+		echo "User successfull created!";
 	} catch (PDOException $e){
 		echo "Can not do that: " . $e->getMessage();
 	}

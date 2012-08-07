@@ -26,10 +26,16 @@
  - CSS improvments
  - SQL improvments, migrate everything to POD
  - PostgreSQL support
- 20120629
+ 20120629 - RC 1
  - Bugfixes
  - AJAX for editing an user
  - Statistics-section at the hompage
  - Enabled the enter-key for submit formulars.
  - improved the loginpage
  - Bugfixed PostgreSQL
+ 20120807 - Version 1.0 RC 2
+ - Bugfixes
+ - AJAX creating an user
+ - added encrypton options for the userser-pw
+ - updated the LICENSE, README and INSTALL file
+ - added a robot.txt, which disallow everything for robots

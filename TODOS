@@ -1,13 +1,7 @@
 TODOs:
-Version 1.0
- - AJAX bei neuem Benutzer
- - AJAX login
 
-
-  
 Version 1.1
  - Edit Forward
- - PDO http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
 
 Version 1.2
  - Aliases in Forwards anzeigen

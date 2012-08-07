@@ -1,5 +1,34 @@
-Simple DBMail-Admin is under the GNU General Public License v3.
+Simple DBMail Admin (http://code.google.com/p/simple-dbmail-admin/) 
+Copyright (C) 2012 Claas Kähler
 
 
+Introduction:
+=============
+A simple web-GUI written in PHP to administrate DBMail. It just contians the simplest functions:
 
-Take a look at: http://code.google.com/p/simple-dbmail-admin/ for more information.
+  * create/update/delete an user
+  * create/delete a forward or alias
+  * Using AJAX
+  * Supporting MySQL and PostgreSQL
+  * Lightweight software (no images until now!)
+  * No modifications of the ER-model of DBMail 
+  
+    
+Installation:
+=============
+Take a look into the INSTALL file!
+
+
+Licensing:
+==========
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
