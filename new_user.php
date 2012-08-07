@@ -12,7 +12,17 @@
 	<table id='user'>
 		
 	<tr> <th>User ID</th> <td><input name='userid' type='text' size='30'></td><td><i>The ID/Login, e.g. user@domain.com</i></td></tr>
-	<tr> <th>Password</th> <td><input name='passwd' type='text' size='30'> Type: <select name='encryption_type'><option></option><option>md5</option></select></td><td><i>If you are using SASL the password has to be unencrypted.</i></td> </tr>
+	<tr> <th>Password</th> 
+	<td><input name='passwd' type='text' size='30'> Type: <select name='encryption_type'>
+	<option name='plaintext'>plaintext</option>
+	<option name='md5-hash'>md5-hash</option>
+	<option name='md5-digest'>md5-digest</option>
+	<option name='whirlpool'>whirlpool</option>
+	<option name='sha512'>sha512</option>
+	<option name='sha256'>sha256</option>
+	<option name='sha1'>sha1</option>
+	<option name='tiger'>tiger</option></select></td>
+	<td><i>If you are using SASL the password has to be plaintext.</i></td> </tr>
 	<tr> <th>Mailbox size</th> <td> <input name='maxmail_size' type='text' size='10' value='0'> MB</td> <td><i>0 means unlimited space.</i></td> </tr>
 	
 	</table>
