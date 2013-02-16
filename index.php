@@ -14,7 +14,7 @@
  
   <h1>Welcome to <b>Simple DBMail Admin</b></h1>
 
-<div id='version'><b>Version: </b>1.0 RC2 - You will find updates <a href='http://code.google.com/p/simple-dbmail-admin/'>here</a>.</div>
+<div id='version'><b>Version: </b>1.0 RC3 - You will find updates <a href='http://code.google.com/p/simple-dbmail-admin/'>here</a>.</div>
   
 <h2>Statistics</h2>
 <table id='statistics'>
