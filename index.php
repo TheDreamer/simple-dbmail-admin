@@ -21,11 +21,11 @@
  <?php
 
  	try {
- 		$STH1 = $DBH->prepare('SELECT SUM(curmail_size) AS mboxes_size, COUNT(user_idnr) as nr_users FROM dbmail_users');
- 		$STH1->execute();
- 		$STH1->setFetchMode(PDO::FETCH_ASSOC);
+ 		$STH = $DBH->prepare('SELECT SUM(curmail_size) AS mboxes_size, COUNT(user_idnr) as nr_users FROM dbmail_users');
+ 		$STH->execute();
+ 		$STH->setFetchMode(PDO::FETCH_ASSOC);
  		
- 		while ($row = $STH1->fetch()) {
+ 		while ($row = $STH->fetch()) {
 	    
 	 		// calculating a human readable number for the mailbox size
  			$mboxes_size = round($row['mboxes_size'] / 1048576, 2);
@@ -35,12 +35,27 @@
 			
 		}
 		
-		$STH2 = $DBH->prepare('SELECT COUNT(alias_idnr) AS nr_aliases FROM dbmail_aliases');
-		$STH2->execute();
-		$STH2->setFetchMode(PDO::FETCH_ASSOC);
-		while ($row = $STH2->fetch()) { 
+		$STH = $DBH->prepare('SELECT COUNT(alias_idnr) AS nr_aliases FROM dbmail_aliases');
+		$STH->execute();
+		$STH->setFetchMode(PDO::FETCH_ASSOC);
+		while ($row = $STH->fetch()) { 
 			echo "<tr> <th>Number of aliases</th> <td> ".$row['nr_aliases']." </td> </tr>";
 		}
+		
+		$STH = $DBH->prepare('select Count(id) as nr_messages from dbmail_physmessage;');
+		$STH->execute();
+		$STH->setFetchMode(PDO::FETCH_ASSOC);
+		while ($row = $STH->fetch()) {
+			echo "<tr> <th>Number of messages</th> <td> ".$row['nr_messages']." </td> </tr>";
+		}
+		
+		$STH = $DBH->prepare('select Count(id) as nr_messages from dbmail_physmessage where TO_DAYS(internal_date) > TO_DAYS(NOW())-100;');
+		$STH->execute();
+		$STH->setFetchMode(PDO::FETCH_ASSOC);
+		while ($row = $STH->fetch()) {
+			echo "<tr> <th>Average messages per day <br> (last 100 days)</th> <td> ". ($row['nr_messages']/100) ." </td> </tr>";
+		}
+		
  	} catch (PDOException $e){
 		echo "Can not do that: " + $e->getMessage();
  	}

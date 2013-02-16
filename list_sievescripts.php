@@ -8,20 +8,26 @@
  <?php include('db_connection.php'); ?>
 <?php
 try {
-	$STH = $DBH->prepare('SELECT * FROM dbmail_aliases WHERE deliver_to= :deliver_to');
-	$STH->bindParam(':deliver_to', $_GET['user_idnr']);
+	$STH = $DBH->prepare('SELECT * FROM dbmail_sievescripts WHERE owner_idnr= :owner_idnr');
+	$STH->bindParam(':owner_idnr', $_GET['user_idnr']);
 	$STH->execute();
 	# setting the fetch mode
 	$STH->setFetchMode(PDO::FETCH_ASSOC);
 	
-	echo "<table>";
+	echo "<table id='sievescripts'>";
+	echo "<th>Name</th><th>Status</th>";
 		while ($row = $STH->fetch())
 		{
-			echo "<tr> <td>".$row['alias']."</td><td><a class='forward_del' href='JavaScript: delAlias(".$row['alias_idnr'].");'>X</a></td></tr>";
+			echo "<tr> <td><a href=''>".$row['name']."</a></td>";
+			if ($row['active'] == "1")
+				echo "<td class='active'>active</td>";
+			else 
+				echo "<td class='notactive'>not active</td>";
+			echo "</tr>";
 		}
 	echo "</table>";
 	$numberEntries = $STH->rowCount();
-	echo "<p>Number of aliases: $numberEntries </p>";
+	echo "<p>Number of sievescrips: $numberEntries </p>";
 } catch (PDOException $e){
 	echo "Can not do that: " . $e->getMessage();
 }

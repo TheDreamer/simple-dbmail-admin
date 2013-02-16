@@ -1,7 +1,8 @@
 TODOs:
 
 Version 1.1
- - Edit Forward
+ - noch nie eingelogt wenn Datum auf 1979-11-03 22:05:58
+ - Sievescripte anzeigen und ändern. 
 
 Version 1.2
  - Aliases in Forwards anzeigen
@@ -15,3 +16,9 @@ Version 2.0:
  Version 3.0:
  - Backup
  - eigene Tabelle für Login und Metadaten (Namen ect)
+ 
+ 
+ IDEEN:
+ 
+ - Versionsmodul http://www.spbas.com/company/blog/2012/05/02/product-version-module/
+ - JSON-Schnittstellen

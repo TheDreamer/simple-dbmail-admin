@@ -30,7 +30,11 @@
 			echo "<tr> <th>User ID</th> <td><input name='userid' type='text' value='".$row['userid']."' size='30'></td><td><i>The ID/Login, e.g. user@domain.com</i></td> </tr>";
 			echo "<tr> <th>Password</th> <td><input name='passwd' type='text' value='".$row['passwd']."' size='30'> Type: ";
 			echo "<select name='encryption_type'>";
-			if ($row['encryption_type'] == "" or $row['encryption_type'] == "")
+			if ($row['encryption_type'] == "")
+				echo "<option name='blank' selected='selected'></option>";
+			else
+				echo "<option name='blank'></option>";
+			if ($row['encryption_type'] == "plaintext")
 				echo "<option name='plaintext' selected='selected'>plaintext</option>";
 			else
 				echo "<option name='plaintext'>plaintext</option>";
@@ -62,7 +66,7 @@
 				echo "<option name='tiger' selected='selected'>tiger</option>";
 			else
 				echo "<option name='tiger'>tiger</option>";
-			echo "</select></td> <td><i>If you are using SASL the password has to be plaintext.</i></td></tr>"; 
+			echo "</select></td> <td><i>If you are using SASL the password use the blank option, 'plaintext' will not work.</i></td></tr>"; 
 			echo "<tr> <th>Mailbox size</th> <td>".$mbox_cur_mb." MB / <input name='maxmail_size' type='text' value='".$mbox_max_mb."' size='10'> MB</td> <td><i>0 means unlimited space.</i></td> </tr>";
 			echo "<tr> <th>Last Login</th> <td>".$row['last_login']."</td> </tr>";
 		}
@@ -86,6 +90,15 @@
 	
 	<h2>Aliases</h2>
 
+	<div id='aliases'>
+	</div>
+	
+	<div id='new_alias_container'>
+	<form id='new_alias' action='JavaScript:saveAlias()' method='post'>
+			<input type='text' name='alias' size='30'><a href='JavaScript:saveAlias()'>Add</a>
+	</form>
+	</div>
+	
 	
 	<script type="text/javascript">
 	function loadAliases()
@@ -103,6 +116,7 @@
 			if (xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
 				document.getElementById("aliases").innerHTML=xmlhttp.responseText;
+				loadSievescripts();
 			}
 		}
 		xmlhttp.open("GET","list_aliases.php?user_idnr=" + document.getElementById('user_idnr').innerHTML,true);
@@ -203,16 +217,23 @@
 	</script>
 	
 	
-	<div id='aliases'>
-	</div>
 	
-	<div id='new_alias_container'>
-	<form id='new_alias' action='JavaScript:saveAlias()' method='post'>
-			<input type='text' name='alias' size='30'><a href='JavaScript:saveAlias()'>Add</a>
-	</form>
-	</div>
 	<!-- Keylistener 'press the enter-key to create a new alias, if the form is fucused'. -->
-  
+  	<script type="text/javascript">
+	function keydown_alias (event){
+	  if (!event)
+	   event = window.event;
+		  if (event.which) {
+		    keycode = event.which;
+		  } else if (event.keyCode) {
+		    keycode = event.keyCode;
+		  }
+	   if (keycode == 13){
+		  document.forms['new_alias'].submit();
+	   }
+	}
+	document.forms['new_alias'].onkeydown = keydown_alias;
+ 	</script>
 	
 	<!-- AJAX-Script for deleting an user -->
 	<script type="text/javascript">
@@ -240,6 +261,41 @@
 		}
 	}
 	</script>
+	
+	
+	<hr  align="left"></hr>
+	
+	<!-- DBMail sievescripts for that user -->
+	
+	<h2>Sievescripts</h2>
+	
+	<div id='sievescripts'>
+	</div>
+	
+	
+	<script type="text/javascript">
+	function loadSievescripts()
+	{
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				document.getElementById("sievescripts").innerHTML=xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open("GET","list_sievescripts.php?user_idnr=" + document.getElementById('user_idnr').innerHTML,true);
+		xmlhttp.send();
+	}
+	</script>
+
 	
 	<div id='response'></div>
 	</div>
