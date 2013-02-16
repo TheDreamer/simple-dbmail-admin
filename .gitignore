@@ -1,2 +1,7 @@
 # ignore TODO-file
 TODOS
+
+# ignore zip-files
+*.zip
+*.tar
+*.gz
